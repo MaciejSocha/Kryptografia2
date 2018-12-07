@@ -1,3 +1,3 @@
-# Kryptografia2
+# Kryptografia3
 
-Napisać program szyfrujący/deszyfrujący dane wprowadzone przez użytkownika lub z pliku za pomocą szyfru strumieniowego na podstawie generatora Blum-Micali
+Napisać program tworzący podpis cyfrowy (weryfikujący podpis cyfrowy) danych wprowadzonych przez użytkownika lub z pliku przy użyciu algorytmu DSA
