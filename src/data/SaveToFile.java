@@ -35,6 +35,11 @@ public class SaveToFile {
 
     }
 
+    /**
+     * Robi tablicę z listy, potrzebne do poprawnego zapisu
+     * @param list - lista bitów do zapisania
+     * @return - tablica w bajtami
+     */
     private byte[] makeTableFromList(List<Byte> list) {
         List<Byte> byteList = new ArrayList<>();
 
@@ -50,6 +55,12 @@ public class SaveToFile {
         return ret;
     }
 
+    /**
+     * Robi z bitów bajty
+     * @param list - lista bitów
+     * @param offset - co ile dzielić
+     * @return - bajt
+     */
     private byte getOneByte(List<Byte> list, int offset) {
         byte ret = 0;
         for (int i = offset; (i < list.size() && ((i-offset) < 8)); i++) {
