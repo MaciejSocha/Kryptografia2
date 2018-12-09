@@ -32,7 +32,7 @@ public class DSA implements Algorithm {
     }
 
     private BigInteger calculateW(BigInteger s, BigInteger q) {
-        s = BigInteger.One.divide(s);
+        s = BigInteger.ONE.divide(s);
         return s.mod(q);
     }
 
