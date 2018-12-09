@@ -36,8 +36,8 @@ public class DSA implements Algorithm {
         return s.modPow(minusOne, q);
     }
 
-    private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x) {
-        return k.pow(-1).multiply(calculateH().add(x.multiply(r)));
+    private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) {
+        return (k.pow(-1).multiply(calculateH().add(x.multiply(r)))).mod(q);
     }
 
     private BigInteger calculateH() {
@@ -58,7 +58,7 @@ public class DSA implements Algorithm {
         BigInteger k = new BigInteger(random.nextInt(159), new Random());
         BigInteger x = new BigInteger(random.nextInt(159), new Random());
         BigInteger r = calculateR(g,k,p,q);
-        BigInteger s = calculateS(r,k,x);
+        BigInteger s = calculateS(r,k,x,q);
         BigInteger y = calculateY(g,x,p);
         String[] ret = new String[3];
         ret[0] = r.toString();
