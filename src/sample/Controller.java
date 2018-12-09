@@ -1,6 +1,7 @@
 package sample;
 
 import algorithm.Algorithm;
+import algorithm.DSA;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -19,9 +20,7 @@ public class Controller {
     public Button browse, verifyFile, generateSignature;
 
     public Controller() {
-        /*algorithm = new Algorithm();
-        saveToFile = new SaveToFile();
-        generateKey = new GenerateKey();*/
+        algorithm = new DSA();
     }
 
     public void pressBrowse() {
