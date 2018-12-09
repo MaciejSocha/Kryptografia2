@@ -5,9 +5,10 @@ import java.io.File;
 public interface Algorithm {
     /**
      * @param publicKey - klucz publiczny do zweryfikowania poprawności pliku
+     * @param file - plik do weryfikacji
      * @return - czy plik jest poprawny
      */
-    boolean verifyKey(String publicKey);
+    boolean verifyFile(String publicKey, File file);
 
     /**
      * @param privateKey - klucz do wygenerowania klucza publicznego

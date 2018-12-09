@@ -79,7 +79,7 @@
                 </TextArea>
             </children>
         </GridPane>
-      <Button fx:id="verifySignature" mnemonicParsing="false" onAction="#pressVerifySignature" text="Verify signature" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Button fx:id="verifyFile" mnemonicParsing="false" onAction="#pressVerifyFile" text="Verify file" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
             <Font name="Comic Sans MS" size="26.0" />
          </font></Button>
