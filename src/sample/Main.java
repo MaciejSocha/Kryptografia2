@@ -20,7 +20,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         System.out.println("dupa");
-        String dupa = "dupa";
+        String dupa = "wziąść";
         Sha1 sha1 = new Sha1();
         String ans = sha1.hasz(dupa);
         System.out.println(ans);
