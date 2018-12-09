@@ -48,7 +48,7 @@ public class Conversions {
         List<Byte> ret = new ArrayList<>();
         int val = number;
         for (int i = 0; i < 4; i++) {
-            ret.add((byte)((val & 8) == 0 ? 0 : 1));
+            ret.add((byte) ((val & 8) == 0 ? 0 : 1));
             val <<= 1;
         }
         return ret;
@@ -58,7 +58,7 @@ public class Conversions {
         List<Byte> ret = new ArrayList<>();
         int val = number;
         for (int i = 0; i < 8; i++) {
-            ret.add((byte)((val & 128) == 0 ? 0 : 1));
+            ret.add((byte) ((val & 128) == 0 ? 0 : 1));
             val <<= 1;
         }
         return ret;
@@ -67,22 +67,22 @@ public class Conversions {
     //Przerabia gotowy ciąg binarny w postaci string na ciąg binarny w postaci listy jednakowych ciągów binarnych o długości 64
     public static List<List<Byte>> encodedMessageTo64Byte(List<Byte> message) {
         List<List<Byte>> ret = new ArrayList<>();
-        int size = message.size()/64;
-        if(message.size()%64!= 0) {
-            size +=1;
+        int size = message.size() / 64;
+        if (message.size() % 64 != 0) {
+            size += 1;
         }
-        if(!cropIsSet) {
+        if (!cropIsSet) {
             cropValue = 64 - message.size() % 64;
             if (cropValue == 64) {
                 cropValue = 0;
             }
             cropIsSet = true;
         }
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             ret.add(new ArrayList<>());
-            for(int j = 0; j < 64; j++) {
-                if(i*64+j >= message.size()) {
-                    ret.get(i).add((byte)0);
+            for (int j = 0; j < 64; j++) {
+                if (i * 64 + j >= message.size()) {
+                    ret.get(i).add((byte) 0);
                 } else {
                     ret.get(i).add(message.get(i * 64 + j));
                 }
@@ -101,19 +101,42 @@ public class Conversions {
 
     //Przerabia ciąg binarny na ciag znaków
     public static String toNormalCharacters(String binary) {
-        int pom = binary.length()/8;
+        int pom = binary.length() / 8;
         String[] ss = new String[pom];
 
-        for(int i = 0; i < pom; i++) {
-            ss[i] = binary.substring(i*8, i*8+8);
+        for (int i = 0; i < pom; i++) {
+            ss[i] = binary.substring(i * 8, i * 8 + 8);
         }
 
         StringBuilder sb = new StringBuilder();
 
-        for ( int i = 0; i < ss.length; i++ ) {
-            sb.append( (char)Integer.parseInt( ss[i], 2 ) );
+        for (int i = 0; i < ss.length; i++) {
+            sb.append((char) Integer.parseInt(ss[i], 2));
         }
 
         return sb.toString();
+    }
+
+    //Heksadecymalne na binarke robi
+    public List<Byte> hexToBin(String hex) {
+        ArrayList<Byte> result = new ArrayList<>();
+        for (int i = 0; i < hex.length(); i++) {
+
+            int bin = Integer.parseInt(hex.substring(i, i + 1), 16);
+            String pom = Integer.toBinaryString(bin);
+
+            for (int j = 3; j >= 0; j--) {
+                if (j < pom.length()) {
+                    if (pom.charAt(j) == '1') {
+                        result.add((byte) 1);
+                    } else {
+                        result.add((byte) 0);
+                    }
+                } else {
+                    result.add((byte) 0);
+                }
+            }
+        }
+        return result;
     }
 }
