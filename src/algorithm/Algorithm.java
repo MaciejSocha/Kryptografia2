@@ -16,5 +16,5 @@ public interface Algorithm {
      * @param file       - plik do utworzenia klucza publicznego
      * @return - klucz publiczny
      */
-    String generateKey(String privateKey, File file);
+    String[] generateKey(String privateKey, File file);
 }

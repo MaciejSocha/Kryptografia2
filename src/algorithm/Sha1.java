@@ -1,17 +1,20 @@
 package algorithm;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Sha1 {
-    public String hasz(String message) {
+    public static String hasz(File file) {
 
         byte hash[];
         try {
             MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
-            hash = sha1.digest(message.getBytes(StandardCharsets.UTF_8));
+            hash = sha1.digest(Files.readAllBytes(file.toPath()));
 
             //Postać znakowa?
             BigInteger bi = new BigInteger(1, hash);
@@ -24,7 +27,7 @@ public class Sha1 {
             }
 
             return text;
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
         return null;
