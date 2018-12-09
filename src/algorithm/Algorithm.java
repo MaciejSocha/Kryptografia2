@@ -1,21 +1,18 @@
 package algorithm;
 
-import java.util.List;
+import java.io.File;
 
 public interface Algorithm {
     /**
-     *
-     * @param message - ciąg bitów do zakodowania
-     * @param key - klucz w postci ciągu heksadecymalnego
-     * @return - zakodowany ciąg bitów
+     * @param publicKey - klucz publiczny do zweryfikowania poprawności pliku
+     * @return - czy plik jest poprawny
      */
-    public List<Byte> encode (List<Byte> message, String key);
+    boolean verifyKey(String publicKey);
 
     /**
-     *
-     * @param message - ciąg zakodowanych bitów do rozkodowania
-     * @param key - klucz w postaci ciągu heksadecymalnego
-     * @return - odkodoawny ciąg bitów
+     * @param privateKey - klucz do wygenerowania klucza publicznego
+     * @param file       - plik do utworzenia klucza publicznego
+     * @return - klucz publiczny
      */
-    public List<Byte> decode (List<Byte> message, String key);
+    String generateKey(String privateKey, File file);
 }
