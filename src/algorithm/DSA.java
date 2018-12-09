@@ -32,8 +32,8 @@ public class DSA implements Algorithm {
     }
 
     private BigInteger calculateW(BigInteger s, BigInteger q) {
-        BigInteger minusOne = new BigInteger("-1");
-        return s.modPow(minusOne, q);
+        s = BigInteger.One.divide(s);
+        return s.mod(q);
     }
 
     private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) {
