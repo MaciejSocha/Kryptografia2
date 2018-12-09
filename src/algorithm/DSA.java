@@ -37,7 +37,7 @@ public class DSA implements Algorithm {
     }
 
     private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) {
-        return (k.pow(-1).multiply(calculateH().add(x.multiply(r)))).mod(q);
+        return (BigInteger.ONE.divide(k).multiply(calculateH().add(x.multiply(r)))).mod(q);
     }
 
     private BigInteger calculateH() {
