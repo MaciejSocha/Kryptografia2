@@ -12,6 +12,7 @@ public class DSA implements Algorithm {
     private BigInteger g;
     private BigInteger x;
     private BigInteger h;
+    private BigInteger y;
 
     @Override
     public boolean verifyFile(String publicKey, File file) {
@@ -23,12 +24,12 @@ public class DSA implements Algorithm {
         return null;
     }
 
-    private void generateNumbers() {
+    public void generateNumbers() {
         Random r = new Random();
         q = BigInteger.probablePrime(160, new Random());
 
-        int l=0;
-        while (l%64!=0)
+        int l =-10;
+        while (l % 64 != 0)
             l = ThreadLocalRandom.current().nextInt(512, 1024);
         p = BigInteger.probablePrime(l, new Random());
 
@@ -36,6 +37,10 @@ public class DSA implements Algorithm {
 
         x = new BigInteger(r.nextInt(159), new Random());
 
-        h = new BigInteger(r.nextInt(l-1), new Random());
+        h = new BigInteger(r.nextInt(l - 1), new Random());
+
+        g = (h.modPow((p.subtract(BigInteger.ONE)).divide(q), p));
+
+        y = g.modPow(x, p);
     }
 }

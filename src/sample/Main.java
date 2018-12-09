@@ -1,5 +1,6 @@
 package sample;
 
+import algorithm.DSA;
 import algorithm.Sha1;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,11 +29,9 @@ public class Main extends Application {
         String ans = sha1.hasz(dupa);
         System.out.println(ans);
 
-        BigInteger a = new BigInteger("5");
-        BigInteger b = new BigInteger("8");
-        BigInteger c = new BigInteger("2");
-        BigInteger r = ExponentiationBySquaring.exponentiationBySquaring(a,b,c);
-        System.out.println(r);
+        DSA dsa = new DSA();
+        dsa.generateNumbers();
+        System.out.println("dupa");
         launch(args);
     }
 }
