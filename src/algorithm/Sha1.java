@@ -12,6 +12,7 @@ public class Sha1 {
     public static String hasz(File file) {
 
         byte hash[];
+        String text="0";
         try {
             MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
             hash = sha1.digest(Files.readAllBytes(file.toPath()));
@@ -19,17 +20,16 @@ public class Sha1 {
             //Postać znakowa?
             BigInteger bi = new BigInteger(1, hash);
             //Wartość hex
-            String text = bi.toString(16);
+            text = bi.toString(16);
 
             //Uzuepłnienie 0 do 32 bitów
             while (text.length() < 32) {
                 text += "0";
             }
 
-            return text;
         } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return text;
     }
 }
