@@ -7,13 +7,14 @@ import javafx.scene.control.TextArea;
 
 import javax.swing.*;
 import java.io.File;
+import java.math.BigInteger;
 
 public class Controller {
     private File file;
     private Algorithm algorithm;
 
     @FXML
-    public TextArea privateKey, publicKey, selectedFile, messages;
+    public TextArea privateKey, publicKey, selectedFile, messages, sSignature, rSignature;
     @FXML
     public Button browse, verifyFile, generateSignature;
 
@@ -35,7 +36,8 @@ public class Controller {
 
     public void pressVerifyFile() {
         if (file != null && publicKey.getText().length() > 0) {
-            boolean isVerified = algorithm.verifyFile(publicKey.getText(), file);
+            BigInteger[] signatures = new BigInteger[]{new BigInteger(rSignature.getText()), new BigInteger(sSignature.getText())};
+            boolean isVerified = algorithm.verifyFile(publicKey.getText(), signatures, file);
             if (isVerified) {
                 messages.setText("File is correct.");
             } else {
@@ -46,7 +48,10 @@ public class Controller {
 
     public void pressGenerateSignature() {
         if (file != null && privateKey.getText().length() > 0) {
-            publicKey.setText(algorithm.generateKey(privateKey.getText(), file));
+            String[] info = algorithm.generateKey(privateKey.getText(), file);
+            publicKey.setText(info[2]);
+            rSignature.setText(info[0]);
+            sSignature.setText(info[1]);
             messages.setText("Public key has been generated.");
         }
     }

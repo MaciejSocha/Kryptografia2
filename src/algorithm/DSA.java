@@ -49,7 +49,7 @@ public class DSA implements Algorithm {
     }
 
     private BigInteger calculateY(BigInteger g, BigInteger x, BigInteger p) {
-        return g.modPow(x,p);
+        return g.modPow(x, p);
     }
 
     @Override
@@ -57,9 +57,9 @@ public class DSA implements Algorithm {
         Random random = new Random();
         BigInteger k = new BigInteger(random.nextInt(159), new Random());
         BigInteger x = new BigInteger(random.nextInt(159), new Random());
-        BigInteger r = calculateR(g,k,p,q);
-        BigInteger s = calculateS(r,k,x,q);
-        BigInteger y = calculateY(g,x,p);
+        BigInteger r = calculateR(g, k, p, q);
+        BigInteger y = calculateY(g, x, p);
+        BigInteger s = calculateS(r, k, x, q);
         String[] ret = new String[3];
         ret[0] = r.toString();
         ret[1] = s.toString();
