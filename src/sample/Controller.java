@@ -1,5 +1,6 @@
 package sample;
 
+import algorithm.Algorithm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class Controller {
     private File file;
+    private Algorithm algorithm;
 
     @FXML
     public TextArea privateKey, publicKey, selectedFile, messages;
