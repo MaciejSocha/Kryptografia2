@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.io.File;
+import java.math.BigInteger;
 
 public interface Algorithm {
     /**
@@ -8,7 +9,7 @@ public interface Algorithm {
      * @param file - plik do weryfikacji
      * @return - czy plik jest poprawny
      */
-    boolean verifyFile(String publicKey, File file);
+    boolean verifyFile(String publicKey, BigInteger[] signature, File file);
 
     /**
      * @param privateKey - klucz do wygenerowania klucza publicznego

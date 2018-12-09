@@ -16,9 +16,11 @@ public class DSA implements Algorithm {
     private File file;
 
     @Override
-    public boolean verifyFile(String publicKey, File file) {
+    public boolean verifyFile(String publicKey, BigInteger[] signature, File file) {
+        generateNumbers();
         this.file = file;
-        return calculateR(g, k, p, q).equals(calculateV(g, k, y, p, x, q));
+        BigInteger y = new BigInteger(publicKey);
+        return signature[0].equals(calculateV(g, signature[0], y, p, signature[1], q));
     }
 
     private BigInteger calculateR(BigInteger g, BigInteger k, BigInteger p, BigInteger q) {
@@ -26,16 +28,14 @@ public class DSA implements Algorithm {
         return ret.mod(q);
     }
 
-    private BigInteger calculateV(BigInteger g, BigInteger k, BigInteger y, BigInteger p, BigInteger x, BigInteger q) {
-        BigInteger r = calculateR(g, k, p, q);
-        BigInteger w = calculateW(g, k, p, x, q);
+    private BigInteger calculateV(BigInteger g, BigInteger r, BigInteger y, BigInteger p, BigInteger s, BigInteger q) {
+        BigInteger w = calculateW(s, q);
         BigInteger ret = (g.modPow(calculateU2(r, w, q), p).multiply(y.modPow(calculateU2(r, w, q), p))).mod(p);
         ret = ret.mod(q);
         return ret;
     }
 
-    private BigInteger calculateW(BigInteger g, BigInteger k, BigInteger p, BigInteger x, BigInteger q) {
-        BigInteger s = calculateS(g, k, p, x, q);
+    private BigInteger calculateW(BigInteger s, BigInteger q) {
         BigInteger minusOne = new BigInteger("-1");
         return s.modPow(minusOne, q);
     }
