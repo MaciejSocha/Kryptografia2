@@ -55,6 +55,7 @@ public class DSA implements Algorithm {
     @Override
     public String[] generateKey(String privateKey, File file) {
         Random random = new Random();
+        generateNumbers();
         BigInteger k = new BigInteger(random.nextInt(159), new Random());
         BigInteger x = new BigInteger(random.nextInt(159), new Random());
         BigInteger r = calculateR(g, k, p, q);
@@ -67,7 +68,7 @@ public class DSA implements Algorithm {
         return ret;
     }
 
-    public void generateNumbers() {
+    private void generateNumbers() {
         Random r = new Random();
         q = BigInteger.probablePrime(160, new Random());
 
