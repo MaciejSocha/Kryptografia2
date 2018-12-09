@@ -55,6 +55,7 @@ public class DSA implements Algorithm {
     @Override
     public String[] generateKey(String privateKey, File file) {
         Random random = new Random();
+        this.file = file;
         generateNumbers();
         BigInteger k = new BigInteger(random.nextInt(159), new Random());
         BigInteger x = new BigInteger(random.nextInt(159), new Random());
