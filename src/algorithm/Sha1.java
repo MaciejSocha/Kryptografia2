@@ -12,9 +12,13 @@ public class Sha1 {
         try {
             MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
             hash = sha1.digest(message.getBytes(StandardCharsets.UTF_8));
+
+            //Postać znakowa?
             BigInteger bi = new BigInteger(1, hash);
+            //Wartość hex
             String text = bi.toString(16);
 
+            //Uzuepłnienie 0 do 32 bitów
             while (text.length() < 32) {
                 text += "0";
             }
