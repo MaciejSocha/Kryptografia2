@@ -21,7 +21,7 @@ public class Controller {
     @FXML
     public TextArea privateKey, publicKey, selectedFile, messages;
     @FXML
-    public Button browse, verifySignature, generateSignature;
+    public Button browse, verifyFile, generateSignature;
 
     public Controller() {
         /*algorithm = new Algorithm();
@@ -39,23 +39,21 @@ public class Controller {
         }
     }
 
-    public void pressVerifySignature(ActionEvent event) {
+    public void pressVerifyFile() {
         if(file != null && publicKey.getText().length() > 0) {
-            /*encode.setDisable(true);
-            encoded = algorithm.encode3DES(getBytesFromFile(), key.getText());
-            saveToFile.save("encode" + end, encoded, 0);
-            messages.setText("File has been encoded.");
-            encode.setDisable(false);*/
+            boolean isVerified = algorithm.verifyFile(publicKey.getText(), file);
+            if(isVerified) {
+                messages.setText("File is correct.");
+            } else {
+                messages.setText("File is incorrect.");
+            }
         }
     }
 
-    public void pressGenerateSignature(ActionEvent event) {
+    public void pressGenerateSignature() {
         if(file != null && privateKey.getText().length() > 0) {
-            /*decode.setDisable(true);
-            decoded = algorithm.decode3DES(getBytesFromFile(), key.getText());
-            saveToFile.save("decode" + end, decoded, 0);
-            messages.setText("File has been successfully decoded.");
-            decode.setDisable(false);*/
+            publicKey.setText(algorithm.generateKey(privateKey.getText(), file));
+            messages.setText("Public key has been generated.");
         }
     }
 
