@@ -16,7 +16,39 @@ public class DSA implements Algorithm {
 
     @Override
     public boolean verifyFile(String publicKey, File file) {
-        return false;
+        return calculateR(g,k,p,q).equals(calculateV(g,y,p,q));
+    }
+
+    private BigInteger calculateR(BigInteger g, BigInteger k, BigInteger p, BigInteger q) {
+        BigInteger ret = g.modPow(k,p);
+        return ret.mod(q);
+    }
+
+    private BigInteger calculateV(BigInteger g, BigInteger y, BigInteger p, BigInteger q) {
+        BigInteger r = calculateR(g,k,p,q);
+        BigInteger w = calculateW(q);
+        BigInteger ret = (g.modPow(calculateU2(r,w,q), p).multiply(y.modPow(calculateU2(r,w,q), p))).mod(p);
+        ret = ret.mod(q);
+        return ret;
+    }
+
+    private BigInteger calculateW(BigInteger q) {
+        BigInteger s = calculateS(k,x,q);
+        BigInteger minusOne = new BigInteger("-1");
+        return s.modPow(minusOne, q);
+    }
+
+    private BigInteger calculateS(BigInteger k, BigInteger x, BigInteger q) {
+        BigInteger r = calculateR(g,k,p,q);
+        return k.pow(-1).multiply(calclulateH().add(x.multiply(r)));
+    }
+
+    private BigInteger calclulateH() {
+        return new BigInteger("0");//TODO
+    }
+
+    private BigInteger calculateU2(BigInteger r, BigInteger w, BigInteger q) {
+        return ((r.mod(q)).multiply(w.mod(q))).mod(q);
     }
 
     @Override
