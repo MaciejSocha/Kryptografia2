@@ -6,15 +6,21 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DSA implements Algorithm {
-    private BigInteger q;
     private BigInteger p;
+    private BigInteger q;
     private BigInteger g;
     private File file;
+
+    public DSA() {
+        p = new BigInteger(SharedValues.p.toString());
+        q = new BigInteger(SharedValues.q.toString());
+        g = new BigInteger(SharedValues.g.toString());
+    }
 
     @Override
     public boolean verifyFile(String publicKey, BigInteger[] signature, File file) {//ok
         this.file = file;
-        generateNumbers();
+        //generateNumbers();
         BigInteger y = new BigInteger(publicKey);
         BigInteger v = calculateV(g, signature[0], y, p, signature[1], q);
         return signature[0].equals(v);
@@ -60,7 +66,7 @@ public class DSA implements Algorithm {
     public String[] generateKey(String privateKey, File file) {
         Random random = new Random();
         this.file = file;
-        generateNumbers();
+        //generateNumbers();
         BigInteger k = new BigInteger(random.nextInt(159), new Random());
         BigInteger x = new BigInteger(random.nextInt(159), new Random());
         BigInteger r = calculateR(g, k, p, q);
