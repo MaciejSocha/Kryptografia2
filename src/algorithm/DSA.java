@@ -32,12 +32,11 @@ public class DSA implements Algorithm {
     }
 
     private BigInteger calculateW(BigInteger s, BigInteger q) {
-        BigInteger minusOne = new BigInteger("-1");
-        return s.modPow(minusOne, q);
+        return s.modInverse(q);
     }
 
     private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) {
-        return (k.pow(-1).multiply(calculateH().add(x.multiply(r)))).mod(q);
+        return (k.modInverse(q).multiply((calculateH().add(x.multiply(r)))).mod(q)).mod(q);
     }
 
     private BigInteger calculateH() {

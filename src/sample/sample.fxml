@@ -110,8 +110,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextArea fx:id="rSignature" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-            <TextArea fx:id="sSignature" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="rSignature" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+            <TextArea fx:id="sSignature" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER" text="R" textAlignment="CENTER" textFill="#d3d3d3" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />

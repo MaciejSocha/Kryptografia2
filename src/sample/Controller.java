@@ -48,9 +48,9 @@ public class Controller {
     public void pressGenerateSignature() {
         if (file != null && privateKey.getText().length() > 0) {
             String[] info = algorithm.generateKey(privateKey.getText(), file);
-            publicKey.setText(info[2]);
             rSignature.setText(info[0]);
             sSignature.setText(info[1]);
+            publicKey.setText(info[2]);
             messages.setText("Public key has been generated.");
         }
     }
