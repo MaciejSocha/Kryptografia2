@@ -12,42 +12,47 @@ public class DSA implements Algorithm {
     private File file;
 
     @Override
-    public boolean verifyFile(String publicKey, BigInteger[] signature, File file) {
+    public boolean verifyFile(String publicKey, BigInteger[] signature, File file) {//ok
         this.file = file;
         generateNumbers();
         BigInteger y = new BigInteger(publicKey);
-        return signature[0].equals(calculateV(g, signature[0], y, p, signature[1], q));
+        BigInteger v = calculateV(g, signature[0], y, p, signature[1], q);
+        return signature[0].equals(v);
     }
 
-    private BigInteger calculateR(BigInteger g, BigInteger k, BigInteger p, BigInteger q) {
+    private BigInteger calculateR(BigInteger g, BigInteger k, BigInteger p, BigInteger q) {//ok
         BigInteger ret = g.modPow(k, p);
         return ret.mod(q);
     }
 
-    private BigInteger calculateV(BigInteger g, BigInteger r, BigInteger y, BigInteger p, BigInteger s, BigInteger q) {
+    private BigInteger calculateV(BigInteger g, BigInteger r, BigInteger y, BigInteger p, BigInteger s, BigInteger q) {//ok
         BigInteger w = calculateW(s, q);
-        BigInteger ret = (g.modPow(calculateU2(r, w, q), p).multiply(y.modPow(calculateU2(r, w, q), p))).mod(p);
+        BigInteger ret = (g.modPow(calculateU1(w, q), p).multiply(y.modPow(calculateU2(r, w, q), p))).mod(p);
         ret = ret.mod(q);
         return ret;
     }
 
-    private BigInteger calculateW(BigInteger s, BigInteger q) {
+    private BigInteger calculateW(BigInteger s, BigInteger q) {//ok
         return s.modInverse(q);
     }
 
-    private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) {
-        return (k.modInverse(q).multiply((calculateH().add(x.multiply(r)))).mod(q)).mod(q);
+    private BigInteger calculateS(BigInteger r, BigInteger k, BigInteger x, BigInteger q) { //ok
+        return (k.modInverse(q).multiply((calculateH().add(x.multiply(r))).mod(q))).mod(q);
     }
 
-    private BigInteger calculateH() {
+    private BigInteger calculateH() {//ok
         return new BigInteger(Sha1.hasz(file));
     }
 
-    private BigInteger calculateU2(BigInteger r, BigInteger w, BigInteger q) {
+    private BigInteger calculateU1(BigInteger w, BigInteger q) {//ok
+        return ((calculateH().mod(q)).multiply(w.mod(q))).mod(q);
+    }
+
+    private BigInteger calculateU2(BigInteger r, BigInteger w, BigInteger q) {//ok
         return ((r.mod(q)).multiply(w.mod(q))).mod(q);
     }
 
-    private BigInteger calculateY(BigInteger g, BigInteger x, BigInteger p) {
+    private BigInteger calculateY(BigInteger g, BigInteger x, BigInteger p) {//ok
         return g.modPow(x, p);
     }
 
