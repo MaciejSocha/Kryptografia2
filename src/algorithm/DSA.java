@@ -23,6 +23,8 @@ public class DSA implements Algorithm {
         //generateNumbers();
         BigInteger y = new BigInteger(publicKey);
         BigInteger v = calculateV(g, signature[0], y, p, signature[1], q);
+        System.out.println(signature[0]);
+        System.out.println(v);
         return signature[0].equals(v);
     }
 
