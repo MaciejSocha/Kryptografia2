@@ -2,6 +2,8 @@ package sample;
 
 import algorithm.Algorithm;
 import algorithm.DSA;
+import data.ReadFile;
+import data.SaveToFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -11,11 +13,11 @@ import java.io.File;
 import java.math.BigInteger;
 
 public class Controller {
-    private File file;
+    private File file, signature;
     private Algorithm algorithm;
 
     @FXML
-    public TextArea privateKey, publicKey, selectedFile, messages, sSignature, rSignature;
+    public TextArea privateKey, publicKey, selectedFile, messages, sSignature, rSignature, fileToSaveName;
     @FXML
     public Button browse, verifyFile, generateSignature;
 
@@ -51,7 +53,21 @@ public class Controller {
             rSignature.setText(info[0]);
             sSignature.setText(info[1]);
             publicKey.setText(info[2]);
+            SaveToFile.save(new BigInteger[]{new BigInteger(info[0]), new BigInteger(info[1]), new BigInteger(info[2])}, fileToSaveName.getText());
             messages.setText("Public key has been generated.");
+        }
+    }
+
+    public void readSignatureFile() {
+        JFileChooser fc = new JFileChooser(new File("").getAbsolutePath());
+        int returnVal = fc.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            signature = fc.getSelectedFile();
+            messages.setText("Signature file succesfuly loaded.");
+            String[] info =  ReadFile.readSignature(signature);
+            rSignature.setText(info[0]);
+            sSignature.setText(info[1]);
+            publicKey.setText(info[2]);
         }
     }
 }

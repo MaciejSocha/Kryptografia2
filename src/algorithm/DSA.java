@@ -3,7 +3,6 @@ package algorithm;
 import java.io.File;
 import java.math.BigInteger;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class DSA implements Algorithm {
     private BigInteger p;
@@ -23,8 +22,6 @@ public class DSA implements Algorithm {
         //generateNumbers();
         BigInteger y = new BigInteger(publicKey);
         BigInteger v = calculateV(g, signature[0], y, p, signature[1], q);
-        System.out.println(signature[0]);
-        System.out.println(v);
         return signature[0].equals(v);
     }
 
@@ -80,7 +77,7 @@ public class DSA implements Algorithm {
         ret[2] = y.toString();
         return ret;
     }
-
+/*
     private void generateNumbers() {
         Random r = new Random();
 
@@ -92,8 +89,8 @@ public class DSA implements Algorithm {
         q = BigInteger.probablePrime(160, new Random());
         /*while ((q.mod(p.divide(BigInteger.ONE))).compareTo(BigInteger.ZERO) != 0){
             q = BigInteger.probablePrime(160, new Random());
-        }*/
+        }
         BigInteger h = new BigInteger(r.nextInt(l - 1), new Random());
         g = (h.modPow((p.subtract(BigInteger.ONE)).divide(q), p));
-    }
+    }*/
 }
