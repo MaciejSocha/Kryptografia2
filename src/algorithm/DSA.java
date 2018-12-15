@@ -70,12 +70,16 @@ public class DSA implements Algorithm {
 
     private void generateNumbers() {
         Random r = new Random();
-        q = BigInteger.probablePrime(160, new Random());
 
         int l = -10;
         while (l % 64 != 0)
             l = ThreadLocalRandom.current().nextInt(512, 1024);
         p = BigInteger.probablePrime(l, new Random());
+
+        q = BigInteger.probablePrime(160, new Random());
+        while ((q.mod(p.divide(BigInteger.ONE))).compareTo(BigInteger.ZERO) != 0){
+            q = BigInteger.probablePrime(160, new Random());
+        }
         BigInteger h = new BigInteger(r.nextInt(l - 1), new Random());
         g = (h.modPow((p.subtract(BigInteger.ONE)).divide(q), p));
     }

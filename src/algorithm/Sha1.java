@@ -20,7 +20,7 @@ public class Sha1 {
             //Postać znakowa?
             BigInteger bi = new BigInteger(1, hash);
             //Wartość hex
-            text = bi.toString(16);
+            text = bi.toString(10);
 
             //Uzuepłnienie 0 do 32 bitów
             while (text.length() < 32) {
