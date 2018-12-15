@@ -82,9 +82,9 @@ public class DSA implements Algorithm {
         p = BigInteger.probablePrime(l, new Random());
 
         q = BigInteger.probablePrime(160, new Random());
-        while ((q.mod(p.divide(BigInteger.ONE))).compareTo(BigInteger.ZERO) != 0){
+        /*while ((q.mod(p.divide(BigInteger.ONE))).compareTo(BigInteger.ZERO) != 0){
             q = BigInteger.probablePrime(160, new Random());
-        }
+        }*/
         BigInteger h = new BigInteger(r.nextInt(l - 1), new Random());
         g = (h.modPow((p.subtract(BigInteger.ONE)).divide(q), p));
     }
